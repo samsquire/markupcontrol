@@ -2,10 +2,9 @@
 <document>
 I am a post.
 This is my text. I like text very much, yesiree!
-<sam name="code.py">
-This is revised now cool</sam>
-
+<sam name="code.py"></sam>
 yes.
 <sam name="another.js">
-extract blocks is cool! cool</sam>
+my code
+</sam>
 </document>

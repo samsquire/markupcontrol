@@ -1,0 +1,4 @@
+<document>
+I am a post.
+yes.
+</document>
