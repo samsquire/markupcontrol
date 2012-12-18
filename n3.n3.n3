@@ -1,0 +1,47 @@
+N3 processor n3.n3
+<div xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:gr="http://purl.org/goodrelations/v1#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+  <div typeof="gr:BusinessEntity" about="http://rdf-translator.appspot.com/#company">
+    <div property="vcard:fn" content="Hepp Space Ventures Inc."></div>
+    <div property="rdfs:label" content="Hepp Space Ventures Inc."></div>
+    <div property="vcard:tel" datatype="xsd:string" content="+49-89-6004-0"></div>
+    <div rel="gr:seeks">
+      <div typeof="gr:Offering" about="http://rdf-translator.appspot.com/#mydemand">
+        <div rel="gr:hasBusinessFunction" resource="http://purl.org/goodrelations/v1#Sell"></div>
+        <div property="gr:validFrom" datatype="xsd:dateTime" content="2009-07-20T00:00:00Z"></div>
+        <div property="gr:validThrough" datatype="xsd:dateTime" content="2010-07-20T00:00:00Z"></div>
+        <div rel="gr:includes">
+          <div typeof="gr:SomeItems">
+            <div rel="foaf:page" resource="http://rdf-translator.appspot.com/"></div>
+            <div property="rdfs:comment" content="A TV set with at least 30 CMT screen-size"></div>
+            <div property="rdfs:label" content="A TV set with at least 30 CMT screen-size"></div>
+          </div>
+        </div>
+        <div rel="gr:hasPriceSpecification" resource="http://rdf-translator.appspot.com/#UnitPriceSpecification"></div>
+        <div rel="foaf:page" resource="http://rdf-translator.appspot.com/"></div>
+      </div>
+    </div>
+    <div property="gr:legalName" content="Hepp Space Ventures Inc."></div>
+    <div rel="vcard:adr">
+      <div typeof="vcard:Address" about="http://rdf-translator.appspot.com/#address">
+        <div property="vcard:locality" content="Neubiberg"></div>
+        <div property="vcard:postal-code" datatype="xsd:string" content="85577"></div>
+        <div property="vcard:street-address" content="1234 Hepp Road"></div>
+        <div property="vcard:region" content="Bavaria"></div>
+        <div property="vcard:country-name" content="Germany"></div>
+      </div>
+    </div>
+    <div rel="foaf:page" resource="http://rdf-translator.appspot.com/"></div>
+    <div rel="foaf:page" resource="http://www.heppnetz.de/"></div>
+    <div rel="vcard:url" resource="http://www.heppnetz.de/"></div>
+  </div>
+  <div typeof="gr:UnitPriceSpecification" about="http://rdf-translator.appspot.com/#UnitPriceSpecification">
+    <div property="gr:hasMaxCurrencyValue" datatype="xsd:float" content="200"></div>
+    <div property="gr:hasCurrency" datatype="xsd:string" content="EUR"></div>
+  </div>
+</div>
