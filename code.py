@@ -1,3 +1,3 @@
 <sam name="code.py">
-extract blocks is cool for python!
+This is revised now
 </sam>
