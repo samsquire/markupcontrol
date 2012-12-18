@@ -1,2 +1,3 @@
 <sam name="code.py">
-This is my code</sam>
+extract blocks is cool for python!
+</sam>

@@ -1,2 +1,3 @@
 <sam name="another.js">
-This is my code</sam>
+extract blocks is cool!
+</sam>
