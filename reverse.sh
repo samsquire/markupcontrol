@@ -16,7 +16,7 @@ do
 	echo $filename
 	# extract text back out
 	echo $reversenode;
-	TEXT=$(xml sel -t -v "$reversenode" $filename);
+	TEXT=$(xml sel -t -v "$reversenode" $filename | xml unesc);
 	echo $TEXT
 	xml ed -L --update "$node" --value "$TEXT" $FILE
 done

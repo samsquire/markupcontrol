@@ -1,14 +1,3 @@
-<?xml version="1.0"?>
-<document>
-I am a post.
-This is my text. I like text very much, yesiree!
-<sam name="code.py">
-This is revised now cool and YEAH MAN!</sam>
-
-yes.
-<sam name="another.js">
-extract blocks better than cool</sam>
-
 <sam type="n3" name="n3.n3">
 
 @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
@@ -49,5 +38,3 @@ extract blocks better than cool</sam>
     gr:validFrom "2009-07-20T00:00:00Z"^^xsd:dateTime;
     gr:validThrough "2010-07-20T00:00:00Z"^^xsd:dateTime;
     foaf:page &lt;&gt; .</sam>
-
-</document>
