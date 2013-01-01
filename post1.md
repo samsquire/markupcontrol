@@ -1,7 +1,7 @@
 <document>I am a post. This is my text. I like text very much,
 yesiree! 
 
-
+Should be ignored
 <sam type="n3" name="myideas.rdfa">
 <sam type="data" name="ideasearch.sparql"><![CDATA[
 PREFIX : <http://samsquire.com/>

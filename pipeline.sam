@@ -1,0 +1,11 @@
+This website uses a pipeline or 'workflow'.
+
+<pipeline>
+	<delay/>
+	<emotionalWords/>
+	<proofRead/>
+</pipeline>
+
+When a markup tag has not been implemented, it gets added to a list of unimplemented tags. This allows them to be implemented at a later date. This website forms a 'fabric of things'.
+
+You can also add to your todo list with a todo tag.

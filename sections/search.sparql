@@ -1,0 +1,9 @@
+<sam type="data" name="search.sparql" to="xml">
+PREFIX : &lt;http://samsquire.com/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+CONSTRUCT   { &lt;http://samsquire.com/&gt; :hasIdea ?ideas }
+WHERE { ?ideas a :Idea  }
+</sam>

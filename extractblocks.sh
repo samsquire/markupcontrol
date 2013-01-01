@@ -25,6 +25,9 @@ while read -r line;
 	fi
 
 	if [[ $VALID -eq 1 ]]; then
+		# Process nested
+		./walk.sh "$FILE"
+    # Process plain markup elements
 		typed="/document/sam[@type and not(./sam)]"
 		typedElements=$(xml sel -t -v "count($typed)" "$FILE")	
 		echo "There are $typedElements typed markup elements.";

@@ -2,7 +2,7 @@
 
 FILE="$1"
 
-VALID="//sam[(./ancestor::sam) and not(./sam)]"
+VALID="(//sam[(./ancestor::sam) and not(./sam)])"
 DEEPEST=$(xml sel -t -v "count($VALID)" "$FILE")
 
 echo "There are $DEEPEST nodes"
@@ -24,9 +24,10 @@ if [[ $DEEPEST > 0 ]]; then
 		xml sel -t -c "$DEEPNODE" "$FILE" > $outfilename
 		if [[ -n "$TYPE" ]]; then
 				./$TYPE.sh $outfilename $filename > ./output/$filename
+				# ./submit.sh ./output/$filename $filename "output"	
 				cat output/$filename
 				# Write the output into the file
-				xml ed -L --update "/sam[@name = '$filename']" --value "$(<output/$filename)"	"$outfilename"
+				xml ed -O -L --update "/sam[@name = '$filename']" --value "$(<output/$filename)"	"$outfilename"
 		fi
 
 		if [[ $DEPENDENTS -gt 0 ]]; then
@@ -34,16 +35,25 @@ if [[ $DEEPEST > 0 ]]; then
 			do
 				INNERTYPE=$(xml sel -t -v "$DEPENDENTNODE[$j]/@type" "$FILE")
 				innerfilename=$(xml sel -t -v "$DEPENDENTNODE[$j]/@name" "$FILE")
-				inneroutputfilename="./output/$innerfilename"	
+				inneroutputfilename="./sections/$innerfilename"	
 				xml sel -t -c "$DEPENDENTNODE[$j]" "$FILE" > $inneroutputfilename;
 				echo "Dependent type is $INNERTYPE"
 				echo "Written Dependent output $inneroutputfilename"
 				# Use the last type
 				# xml ed -L --insert "/sam[@name = '$filename']" --type attr --name "type" --value "$INNERTYPE"	"$outfilename"
-				xml ed -L --update "/sam[@name = '$filename']/@type" --value "$INNERTYPE"	"$outfilename"
-				xml ed -L --update "/sam[@name = '$filename']/@name" --value "$innerfilename"	"$outfilename"
-				./$INNERTYPE.sh $outfilename $innerfilename > $inneroutputfilename
+				xml ed -O -L --update "/sam[@name = '$filename']/@type" --value "$INNERTYPE"	"$outfilename"
+				# xml ed -L --update "/sam[@name = '$filename']/@name" --value "$innerfilename"	"$outfilename"
 
+				# Update text (to preserve mixed text and nodes)
+					TEXT=$(<./output/$filename)
+					echo "Writing into parent: $TEXT $inneroutputfilename"
+					xml ed -O -L --insert "//sam[@name = '$filename']" --type text --name ignored --value "$TEXT" "$inneroutputfilename"
+					# Delete the old node
+					xml ed -O -L --delete "//sam[@name = '$filename']" "$inneroutputfilename"
+					
+					./$INNERTYPE.sh $inneroutputfilename $innerfilename > ./output/$innerfilename
+				echo "Updating file contents"
+				# xml ed -L --update "//sam[@name = '$filename']" --value "$(<./output/$innerfilename)"	"$inneroutputfilename"
 				outfilename="$inneroutputfilename"
 				filename="$innerfilename"	
 				# xml sel --noblanks -t -v "$DEPENDENTNODE[$j]/text()" "$FILE"	

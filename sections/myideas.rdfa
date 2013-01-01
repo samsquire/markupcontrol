@@ -1,0 +1,11 @@
+<sam type="n3" name="myideas.rdfa">@prefix :        &lt;http://samsquire.com/&gt; .
+@prefix rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix owl:     &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix xsd:     &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix rdf:     &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+
+:     :hasIdea      :LifeEngineDashboard ;
+      :hasIdea      :MagazineDashboard ;
+      :hasIdea      :OpenEmailMetadata ;
+      :hasIdea      :Dashboard ;
+      :hasIdea      :EncryptionServer .</sam>

@@ -1,0 +1,11 @@
+<sam type="data" name="currentideas.sparql">
+
+PREFIX : &lt;http://samsquire.com/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+SELECT ?subject 
+        WHERE { ?subject a :Idea . }
+
+</sam>
