@@ -28,9 +28,9 @@ while read -r line;
 		# Process nested
 		./walk.sh "$FILE"
     # Process plain markup elements
-		typed="/document/sam[@type and not(./sam)]"
+		typed="(//sam[@type and not(./sam) and text()])"
 		typedElements=$(xml sel -t -v "count($typed)" "$FILE")	
-		echo "There are $typedElements typed markup elements.";
+		echo "There are $typedElements non-nested typed markup elements.";
 
 		for i in $(seq 1 $typedElements);
 		do 
@@ -49,9 +49,9 @@ while read -r line;
 		done
 
 
-		SEARCH="/document/sam[not(@type)]"
+		SEARCH="//sam[not(@type) and text()]"
 		elements=$(xml sel -t -v "count($SEARCH)" "$FILE")
-
+		./walk.sh "$FILE"
 		echo "There are $elements markup elements.";
 		for i in $(seq 1 $elements);
 		do 
