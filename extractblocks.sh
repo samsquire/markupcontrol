@@ -49,7 +49,7 @@ while read -r line;
 		done
 
 
-		SEARCH="//sam[not(@type) and text()]"
+		SEARCH="(//sam[not(@type) and text()])"
 		elements=$(xml sel -t -v "count($SEARCH)" "$FILE")
 		./walk.sh "$FILE"
 		echo "There are $elements markup elements.";

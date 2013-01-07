@@ -1,0 +1,34 @@
+<doc>
+<a>
+   <b select='yes please'>
+       <c d='text1' e='text11'/>
+       <c d='text2' e='text12'/>
+       <c d='text3' e='text13'/>
+       <c d='text4' e='text14'/>
+       <c d='text5' e='text15'/>
+   </b>
+</a>
+<a>
+   <b select='no thanks'>
+       <c d='text1' e='text21'/>
+       <c d='text3' e='text23'/>
+       <c d='text5' e='text25'/>
+   </b>
+ </a>
+<a>
+   <b select='yes please'>
+       <c d='text1' e='text31'/>
+       <c d='text2' e='text32'/>
+       <c d='text3' e='text33'/>
+       <c d='text4' e='text34'/>
+       <c d='text5' e='text35'/>
+   </b>
+ </a>
+<a>
+   <b select='no thanks'>
+       <c d='text4' e='text41'/>
+       <c d='text3' e='text43'/>
+       <c d='text5' e='text45'/>
+   </b>
+</a>
+</doc>

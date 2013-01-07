@@ -1,4 +1,4 @@
-<sam type="rule" name="page.drl">
+
 package lifeengine.dashboard 
 rule "I like crisps tuesdays"
 when
@@ -22,4 +22,4 @@ then
 end
 
 
-</sam>
+

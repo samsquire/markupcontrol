@@ -1,0 +1,11 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:s1="http://samsquire.com/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <div typeof="rdfs:Resource" about="http://samsquire.com/Sam">
+    <div rel="s1:hasIdea" resource="http://samsquire.com/OpenEmailMetadata"></div>
+    <div rel="s1:hasIdea" resource="http://samsquire.com/LifeEngineDashboard"></div>
+    <div rel="s1:hasIdea" resource="http://samsquire.com/MagazineDashboard"></div>
+    <div rel="s1:hasIdea" resource="http://samsquire.com/Dashboard"></div>
+    <div rel="s1:hasIdea" resource="http://samsquire.com/EncryptionServer"></div>
+  </div>
+</div>

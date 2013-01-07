@@ -1,7 +1,5 @@
-<document>
-<sam name="another.js"/>
-<sam name="fulltable.md">
-<![CDATA[
+
+  
 <html version="HTML+RDFa 1.1" lang="en" xmlns=
 "http://www.w3.org/1999/xhtml" xmlns:rdf=
 "http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs=
@@ -171,109 +169,33 @@
 		</Rows>
 	</sam:table>
 	<div class="camera">
-]]>
 
-<sam type="sparql" name="insertideas.sparql"><![CDATA[
-PREFIX : <http://samsquire.com/> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX xml: <http://www.w3.org/XML/1998/namespace> 
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX samsquire: <http://samsquire.com/> 
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-BASE <http://samsquire.com/> 
-
-INSERT DATA {
-:Idea a owl:Class .
-:IdeaStatus a owl:Class.
-:IdeaProgress a owl:ObjectProperty.
-
-:NoKnownImplementations a owl:Class;
-        rdfs:subClassOf :IdeaStatus.
-        
-:AttemptedImplementation a owl:Class;
-        rdfs:subClassOf :IdeaStatus.
-
-:EncryptionServer a owl:Class; a :Idea;
-	 dc:title "Encryption Server";
-	 dc:description "Encrypt files one by one in a schedule.";
-	 dc:identifier "EncryptionServer".
-
-
-:OpenEmailMetadata a owl:Class; a :Idea;
-	 dc:title "Open Email Metadata";
-	 dc:description "Send metadata in emails to make email more useful.";
-	 dc:identifier "OpenEmailMetadata".
-
-:Dashboard a owl:Class; rdfs:subClassOf :Idea;
-	 dc:title "Dashboard";
-	 dc:description "";
-	 dc:identifier "Dashboard".
-
-:LifeEngineDashboard a :Dashboard;
-	 dc:title "LifeEngine Dashboard";
-	 dc:description "Take control of your life with a standard dashboard.";
-	 dc:identifier "LifeEngineDashboard".
-
-:MagazineDashboard a :Dashboard;
-	 dc:title "Magazine Dashboard";
-	 dc:description "Your life as an infographic.";
-	 dc:identifier "MagazineDashboard".
-}
-]]>
-</sam>
-<![CDATA[
 <table class="ideatable">
 <thead>
 	<th>Idea name</th>
 	<th>Description</th>
 </thead>
 <tbody>
-]]>
-<sam type="xquery" name="theideatable.xq"><![CDATA[
-xquery version "3.0";
-declare namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-declare default element namespace "http://samsquire.com/";
-declare namespace dc = "http://purl.org/dc/elements/1.1/";
-
-let $ideaTable := ]]> <sam type="data" name="ideaasxml.sparql" to="xml"><![CDATA[
-PREFIX : <http://samsquire.com/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-CONSTRUCT {
-	 <http://samsquire.com/> :hasIdea ?ideas .
-			?ideas dc:title ?name.
-			?ideas dc:description ?description.
-			?ideas dc:identifier ?identifier.
-}
-WHERE {
-	 ?ideas a :Idea .
-	 ?ideas dc:title ?name.
-	 ?ideas dc:description ?description.
-	 ?ideas dc:identifier ?identifier.
-}
-]]></sam><![CDATA[
-return (
-    
-for $idea in $ideaTable//hasIdea
-    let $data := $ideaTable//rdf:Description[@rdf:about eq $idea/@rdf:resource]
-    let $pageName := $data/dc:title/text()
-    let $description := $data/dc:description/text()
-    let $identifier := $data/dc:identifier/text()
-    return (
-        element tr {
-						attribute data-reg { $identifier },
-            element td { $pageName},
-            element td { $description }
-        }    
-        )
-)
-]]></sam>
-<![CDATA[
+<tr xmlns="http://samsquire.com/" data-reg="MagazineDashboard">
+    <td>Magazine Dashboard</td>
+    <td>Your life as an infographic.</td>
+</tr>
+<tr xmlns="http://samsquire.com/" data-reg="LifeEngineDashboard">
+    <td>LifeEngine Dashboard</td>
+    <td>Take control of your life with a standard dashboard.</td>
+</tr>
+<tr xmlns="http://samsquire.com/" data-reg="Dashboard">
+    <td>Dashboard</td>
+    <td/>
+</tr>
+<tr xmlns="http://samsquire.com/" data-reg="OpenEmailMetadata">
+    <td>Open Email Metadata</td>
+    <td>Send metadata in emails to make email more useful.</td>
+</tr>
+<tr xmlns="http://samsquire.com/" data-reg="EncryptionServer">
+    <td>Encryption Server</td>
+    <td>Encrypt files one by one in a schedule.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -282,8 +204,7 @@ for $idea in $ideaTable//hasIdea
 	The encryption server is a way of keeping files on a computer secure.
 	</div>	
 
-]]>
-<![CDATA[
+
 	<script> 
 
 		$(".ideatable tr").bind('click', function() {
@@ -366,6 +287,5 @@ for $idea in $ideaTable//hasIdea
 		</script>
 </body>
 </html>
-]]>
-</sam>
-</document>
+
+

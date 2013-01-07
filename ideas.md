@@ -21,42 +21,42 @@ Live Parsing (merging parsers together)
   As you type, the editor keeps an in-memory tree of always valid code.
 
 <sam type="xquery" name="ideatable.xq"><![CDATA[
-let $a := <Sam cheese="5"></Sam>
+let $a := <Element cheese="5"></Element>
 return $a/@cheese
-]]>
-</sam>
-<sam type="dotml" name="svg.xml" graphname="ideas">
+]]></sam>
+
+<div>
+	<sam type="dotml" name="svg.xml" graphname="ideas">
 <sam type="xquery" name="graph.xml">
 xquery version "3.0";
 let $idea := fn:doc("xmldb:exist:///db/sam/output/ideas.md")
 return element dotml:graph {
-    namespace dotml {"http://www.martin-loetzsch.de/DOTML"},
-    namespace xsi {"http://www.w3.org/2001/XMLSchema-instance"},
+		namespace dotml {"http://www.martin-loetzsch.de/DOTML"},
+		namespace xsi {"http://www.w3.org/2001/XMLSchema-instance"},
 
-    attribute file-name { "ideas" },
-    attribute rankdir { "LR" },
-    element dotml:node { attribute id  {"ideasmd"}, attribute label {"ideasmd"}, attribute fontsize { 9 },
-                    attribute font { "Arial" } },
-    (for $section in $idea//sam
-        let $name := fn:replace($section/@name, '\.', '')
-        return (element dotml:node {
-                attribute id { $name },
-                attribute label { $name }
-                },
-                element dotml:edge {
-                    attribute from { $name },
-                    attribute to { "ideasmd" },
-                    attribute label { $section/@type },
-                    attribute fontsize { 9 },
-                    attribute font { "Arial" }
-                    
-                })
-        
-    )
+		attribute file-name { "ideas" },
+		attribute rankdir { "LR" },
+		element dotml:node { attribute id  {"ideasmd"}, attribute label {"ideasmd"}, attribute fontsize { 9 },
+										attribute font { "Arial" } },
+		(for $section in $idea//sam
+				let $name := fn:replace($section/@name, '\.', '')
+				return (element dotml:node {
+								attribute id { $name },
+								attribute label { $name }
+								},
+								element dotml:edge {
+										attribute from { $name },
+										attribute to { "ideasmd" },
+										attribute label { $section/@type },
+										attribute fontsize { 9 },
+										attribute font { "Arial" }
+										
+								})
+				
+		)
 }
 </sam></sam>
-
-
+</div>
 
 <sam type="data" name="example.sparql" to="xml"><![CDATA[
 			PREFIX : <http://samsquire.com/>
@@ -87,6 +87,7 @@ return element dotml:graph {
 		for $idea in $rdf//hasIdea return <a href="{$idea/@rdf:resource}">Idea</a>
 ]]></sam>
 
+Before idea insert:
 <sam type="sparql" name="ideas.sparql">
 <![CDATA[
 PREFIX : <http://samsquire.com/> 
@@ -103,20 +104,26 @@ INSERT DATA {
 :IdeaStatus a owl:Class.
 :IdeaProgress a owl:ObjectProperty.
 
+:SiteTag a owl:AnnotationProperty.
+
 :NoKnownImplementations a owl:Class;
         rdfs:subClassOf :IdeaStatus.
         
 :AttemptedImplementation a owl:Class;
         rdfs:subClassOf :IdeaStatus.
 
-:EncryptionServer a owl:Class; a :Idea.
-:OpenEmailMetadata a owl:Class; a :Idea.
-:Dashboard a owl:Class; rdfs:subClassOf :Idea.
-:LifeEngineDashboard a :Dashboard.
-:MagazineDashboard a :Dashboard.
+:EncryptionServer a owl:Class;
+		a :Idea;
+	 :SiteTag "EncryptionServer".
+
+:OpenEmailMetadata a owl:Class; a :Idea; :SiteTag "OpenEmailMetadata".
+:Dashboard a owl:Class; rdfs:subClassOf :Idea; :SiteTag "Dashboard".
+:LifeEngineDashboard a :Dashboard; :SiteTag "LifeEngineDashboard".
+:MagazineDashboard a :Dashboard; :SiteTag "MagazineDashboard".
 
 }
 ]]></sam>
+End idea insert
 
 
 <sam type="n3" name="samidea.rdfa">

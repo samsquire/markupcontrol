@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<document>
-I am a post.
-This is my text. I like text very much, yesiree!
-HELLO<sam name="code.py">
- this is my code
-</sam>
-yes.
-</document>

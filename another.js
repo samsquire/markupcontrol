@@ -1,2 +1,1 @@
-<sam name="another.js">
-extract blocks better than cool</sam>
+<sam name="another.js">I have been updated</sam>

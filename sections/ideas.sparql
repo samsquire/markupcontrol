@@ -14,17 +14,22 @@ INSERT DATA {
 :IdeaStatus a owl:Class.
 :IdeaProgress a owl:ObjectProperty.
 
+:SiteTag a owl:AnnotationProperty.
+
 :NoKnownImplementations a owl:Class;
         rdfs:subClassOf :IdeaStatus.
         
 :AttemptedImplementation a owl:Class;
         rdfs:subClassOf :IdeaStatus.
 
-:EncryptionServer a owl:Class; a :Idea.
-:OpenEmailMetadata a owl:Class; a :Idea.
-:Dashboard a owl:Class; rdfs:subClassOf :Idea.
-:LifeEngineDashboard a :Dashboard.
-:MagazineDashboard a :Dashboard.
-}
+:EncryptionServer a owl:Class;
+		a :Idea;
+	 :SiteTag "EncryptionServer".
 
+:OpenEmailMetadata a owl:Class; a :Idea; :SiteTag "OpenEmailMetadata".
+:Dashboard a owl:Class; rdfs:subClassOf :Idea; :SiteTag "Dashboard".
+:LifeEngineDashboard a :Dashboard; :SiteTag "LifeEngineDashboard".
+:MagazineDashboard a :Dashboard; :SiteTag "MagazineDashboard".
+
+}
 </sam>

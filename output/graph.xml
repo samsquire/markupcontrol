@@ -1,0 +1,17 @@
+<dotml:graph xmlns:dotml="http://www.martin-loetzsch.de/DOTML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" file-name="ideas" rankdir="LR">
+    <dotml:node id="ideasmd" label="ideasmd" fontsize="9" font="Arial"/>
+    <dotml:node id="ideatablexq" label="ideatablexq"/>
+    <dotml:edge from="ideatablexq" to="ideasmd" label="xquery" fontsize="9" font="Arial"/>
+    <dotml:node id="examplesparql" label="examplesparql"/>
+    <dotml:edge from="examplesparql" to="ideasmd" label="data" fontsize="9" font="Arial"/>
+    <dotml:node id="insertrdfxq" label="insertrdfxq"/>
+    <dotml:edge from="insertrdfxq" to="ideasmd" label="xquery" fontsize="9" font="Arial"/>
+    <dotml:node id="ideaasxmlsparql" label="ideaasxmlsparql"/>
+    <dotml:edge from="ideaasxmlsparql" to="ideasmd" label="data" fontsize="9" font="Arial"/>
+    <dotml:node id="ideassparql" label="ideassparql"/>
+    <dotml:edge from="ideassparql" to="ideasmd" label="sparql" fontsize="9" font="Arial"/>
+    <dotml:node id="samideardfa" label="samideardfa"/>
+    <dotml:edge from="samideardfa" to="ideasmd" label="n3" fontsize="9" font="Arial"/>
+    <dotml:node id="samsideassparql" label="samsideassparql"/>
+    <dotml:edge from="samsideassparql" to="ideasmd" label="data" fontsize="9" font="Arial"/>
+</dotml:graph>

@@ -1,0 +1,9 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://samsquire.com/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://samsquire.com/">
+    <hasIdea rdf:resource="http://samsquire.com/MagazineDashboard"/>
+    <hasIdea rdf:resource="http://samsquire.com/LifeEngineDashboard"/>
+    <hasIdea rdf:resource="http://samsquire.com/Dashboard"/>
+    <hasIdea rdf:resource="http://samsquire.com/OpenEmailMetadata"/>
+    <hasIdea rdf:resource="http://samsquire.com/EncryptionServer"/>
+  </rdf:Description>
+</rdf:RDF>
