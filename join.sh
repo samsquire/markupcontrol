@@ -10,15 +10,18 @@ if [[ -e $FILE ]]; then
 	do
 		INPUT=$line
 		OK=1
-		TYPE=$(xml sel -t -v "/sam[@name = '$INPUT']/@type" "./sections/$INPUT") 	
+		TYPE=$(xml sel -t -v "//sam[@name = '$INPUT']/@type" "./sections/$INPUT") 	
 		if [[ -z "$TYPE" ]]; then
-				NESTED=$(xml sel -t -v "count(/sam[@name = '$INPUT']/child::sam)" "./sections/$INPUT")	
+				NESTED=$(xml sel -t -v "count(//sam[@name = '$INPUT']/child::sam)" "./sections/$INPUT")	
 				if [[ "$NESTED" -gt 0 ]]; then
+				echo "Untyped has $NESTED nested"
+						echo "Untyped has $NESTED nested"
 						OK=0
 					else
-						TEXT=$(xml sel -t -v "/document//sam[@name = '$INPUT']" "$FILE" | xml unesc)
+						echo "Not nested"
+						# TEXT=$(xml sel -t -v "/document//sam[@name = '$INPUT']" "$FILE" | xml unesc)
+						TEXT=$(xml sel -t -v "/sam[@name = '$INPUT']" "./sections/$INPUT" | xml unesc)
 				fi	
-				echo "Untyped has $NESTED nested"
 				echo "Untyped text $INPUT"
 			else
 				echo "Typed text $INPUT"	
