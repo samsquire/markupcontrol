@@ -20,8 +20,14 @@ if [[ $DEEPEST > 0 ]]; then
 		echo "This node is $filename"
 		echo "This Type is: $TYPE"
 		echo "Output file: $outfilename"
-		rm "$outfilename"
-		xml sel -t -c "$DEEPNODE" "$FILE" > $outfilename
+		TEXT=$(xml sel -t -c "$DEEPNODE" "$FILE")
+		LEN=$(echo $TEXT | awk "{print length}")
+		if [[ $LEN -eq 0 ]]; then
+			rm "$outfilename"
+			echo $TEXT > $outfilename
+			else
+				echo "Inclusion node."
+		fi
 		if [[ -n "$TYPE" ]]; then
 				./$TYPE.sh $outfilename $filename > ./output/$filename
 				# ./submit.sh ./output/$filename $filename "output"	
@@ -53,7 +59,16 @@ if [[ $DEEPEST > 0 ]]; then
 					# xml ed -L --update "/sam[@name = '$filename']/@name" --value "$innerfilename"	"$outfilename"
 
 					# Update text (to preserve mixed text and nodes)
+					if [[ -f "./output/$filename" ]];	then
 						TEXT=$(<./output/$filename)
+						else
+							if [[ -f "./sections/$filename" ]]; then
+								echo "Including non-typed input"
+								# Include a non-typed block
+								TEXT=$(xml sel -t -v "//sam[@name = '$filename']" "./sections/$filename" | xml unesc)				
+								echo $TEXT
+							fi	
+						fi
 						echo "Output text is $TEXT"
 						echo "Writing into parent: $TEXT $inneroutputfilename"
 						xml ed -O -L --insert "//sam[@name = '$filename']" --type text --name ignored --value "$TEXT" "$inneroutputfilename"

@@ -15,26 +15,36 @@ if [[ -e $FILE ]]; then
 		if [[ -z "$TYPE" ]]; then
 				NESTED=$(xml sel -t -v "count(//sam[@name = '$INPUT']/child::sam)" "./sections/$INPUT")	
 				FILENESTED=$(xml sel -t -v "count(//sam[@name = '$INPUT']/child::sam)" "$FILE")	
+				echo "$INPUT: Input Untyped has $NESTED nested"
+				echo "$INPUT: Source file has $FILENESTED nested"
 				if [[ "$NESTED" -gt 0 ]]; then
-				echo "Untyped has $NESTED nested"
-						echo "Untyped has $NESTED nested"
 						OK=0
 					else
-						echo "Not nested"
+						echo "$INPUT: Not nested"
 						# TEXT=$(xml sel -t -v "/document//sam[@name = '$INPUT']" "$FILE" | xml unesc)
 						TEXT=$(xml sel -t -v "/sam[@name = '$INPUT']" "./sections/$INPUT" | xml unesc)
-				fi	
-				# The source file has no nested elements, only the section does.
-				if [[ "$FILENESTED" = 0 ]]; then
-					if [[ -z "$MERGING" ]]; then
-						OK=1
-						./join.sh "./sections/$INPUT" "merging"
-						echo "Source file has no nested children. Must be completely sourced."
-						TEXT=$(<./merged/$INPUT)
-						echo $TEXT
-					fi
 				fi
-				echo "Untyped text $INPUT"
+				
+				if [[ $FILENESTED -eq 0 && $NESTED -eq 0 ]]; then
+					echo "No nested - completeley plain."
+					ok=1
+					TEXT=$(xml sel -t -v "//sam[@name = '$INPUT']" "./sections/$INPUT" | xml unesc)
+					echo "$TEXT"
+					else
+						# The source file has no nested elements, only the section does.
+						if [[ "$FILENESTED" = 0 ]]; then
+							if [[ -z "$MERGING" ]]; then
+								OK=1
+								./join.sh "./sections/$INPUT" "merging"
+								echo "Source file has no nested children. Must be completely sourced."
+								TEXT=$(<./merged/$INPUT)
+							fi
+						fi
+				fi
+
+
+				echo "DONE Untyped text $INPUT"
+				echo
 			else
 				echo "Typed text $INPUT"	
 				TEXT=$(<./output/$INPUT)
