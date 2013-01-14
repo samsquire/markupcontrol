@@ -18,7 +18,7 @@ WHERE { ?ideas a :Idea  }
 
 ```
 <sam name="code.py">This is revised now cool and YEAH
-MAN!</sam>yes. 
+MAN! </sam>yes. 
 ```
 <nested>
 	First

@@ -4,13 +4,13 @@
 INSERT DATA {
 :SamServer a owl:Class; a :Idea;
 	 dc:title "Sam Server";
-	 dc:description "Sam's idea";
+	 dc:description "Sam's idea is about doing something like this.";
 	 dc:identifier "SamServer".
 }
 </sam>
 <![CDATA[
 <div class="content SamServer">
-This page was mostly from Ideatable.
+This is the idea database. Please explore.
 </div>
 ]]><sam name="fulltable.md"/>
 </document>

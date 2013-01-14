@@ -19,7 +19,7 @@ Live Parsing (merging parsers together)
 
 :	 You want to parse a date, an address, a sequence of characters that represent a button keypress. You process it like a stream.
   As you type, the editor keeps an in-memory tree of always valid code.
-
+ 
 <sam type="xquery" name="ideatable.xq"><![CDATA[
 let $a := <Element cheese="5"></Element>
 return $a/@cheese

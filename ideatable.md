@@ -1,6 +1,5 @@
 <document>
-<sam name="another.js"/>
-<sam name="fulltable.md">
+<sam name="header.md">
 <![CDATA[
 <html version="HTML+RDFa 1.1" lang="en" xmlns=
 "http://www.w3.org/1999/xhtml" xmlns:rdf=
@@ -173,6 +172,7 @@
 	<div class="camera">
 ]]>
 
+<sam name="another.js"/>
 <sam type="sparql" name="insertideas.sparql"><![CDATA[
 PREFIX : <http://samsquire.com/> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
@@ -223,6 +223,9 @@ INSERT DATA {
 }
 ]]>
 </sam>
+</sam>
+
+<sam name="fulltable.md">
 <![CDATA[
 <table class="ideatable">
 <thead>
@@ -234,7 +237,8 @@ INSERT DATA {
 <sam type="xquery" name="theideatable.xq"><![CDATA[
 xquery version "3.0";
 declare namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-declare default element namespace "http://samsquire.com/";
+declare namespace sam = "http://samsquire.com/";
+(: declare default element namespace "http://samsquire.com/"; :)
 declare namespace dc = "http://purl.org/dc/elements/1.1/";
 
 let $ideaTable := ]]> <sam type="data" name="ideaasxml.sparql" to="xml"><![CDATA[
@@ -257,16 +261,17 @@ WHERE {
 	 ?ideas dc:identifier ?identifier.
 }
 ]]></sam><![CDATA[
+
 return (
     
-for $idea in $ideaTable//hasIdea
+for $idea in $ideaTable//sam:hasIdea
     let $data := $ideaTable//rdf:Description[@rdf:about eq $idea/@rdf:resource]
     let $pageName := $data/dc:title/text()
     let $description := $data/dc:description/text()
     let $identifier := $data/dc:identifier/text()
     return (
         element tr {
-						attribute data-reg { $identifier },
+						attribute data-ref { $identifier },
             element td { $pageName},
             element td { $description }
         }    
@@ -286,10 +291,48 @@ for $idea in $ideaTable//hasIdea
 <![CDATA[
 	<script> 
 
+		function isOpen() {
+			return $('.ideatable').hasClass("open");
+		}
+
+		function toggleEffect(content) {
+				// toggle the open and close effects
+				if (isOpen()) { 
+						console.log(content);
+						foldclose(content);
+					} else {
+						unfold(content);	
+				}
+		}
+		function foldclose(content) {
+			console.log("inside foldclose:" + content);
+			// $('.camera').css({'-webkit-perspective': '1000px', '-webkit-perspective-origin': '9px 76px 200px'});
+			console.log("opened");
+			content.slideUp('slow');
+			$('.ideatable').one('animationend webkitAnimationEnd', function() {
+				$('.camera').css({'-webkit-animation': 'fold 1s 1', top: '25%'});
+				$(this).removeClass('open').addClass('close');
+			});
+			$('.ideatable').css({'-webkit-animation': 'pageclose 1s 1'});
+		}
+
+		function unfold(content) {
+			// $('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px'});
+			console.log("closed");
+			$('.ideatable').one('animationend webkitAnimationEnd', function() {
+				$('.camera').css({'-webkit-animation': 'unfold 1s 1', top: '-20%'});
+				$('.ideatable').removeClass('close').addClass('open');
+			});
+			$('.ideatable').css({'-webkit-animation': 'pageopen 2s 1'});
+
+			content.slideDown('slow');
+}
+
+
 		$(".ideatable tr").bind('click', function() {
 			console.log("table row clicked");
 			var reference = $(this).data('ref');
-			
+			console.log(reference, $(this));			
 			if (window.location.hash == "#" + reference) {
 				changePage();
 			} else { 
@@ -309,10 +352,18 @@ for $idea in $ideaTable//hasIdea
 			*/
 		});
 		
-		var changePage =	function() {
+		function changePage (e) {
+				console.log(e);
 				var reference = document.location.hash.substring(1);
-				console.log(reference);
+				console.log("Change Page");
 				if (reference.length == 0) { 
+					if (isOpen()) {
+						var content = $(".rowContent .content");
+						console.log("closing previously opened");
+						if (content.length > 0) {
+							foldclose($(content));	
+						}
+					}
 					return; 
 				}
 
@@ -330,38 +381,13 @@ for $idea in $ideaTable//hasIdea
 
 				toggleEffect(content);	
 				
-				$('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px'});
+				// $('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px'});
+
 		};
+
 		$(document).on('ready', changePage);
 		$(window).on('hashchange', function() {console.log('hash change');  changePage() });
 
-		function toggleEffect(content) {
-				// toggle the open and close effects
-				if ($('.ideatable').hasClass("open")) { 
-						foldclose(content);
-					} else {
-						unfold(content);	
-				}
-		}
-		function foldclose(content) {
-			console.log("opened");
-			$('.ideatable').one('animationend webkitAnimationEnd', function() {
-				$('.camera').css({'-webkit-animation': 'fold 1s 1', top: '25%'});
-			});
-			$('.ideatable').css({'-webkit-animation': 'pageclose 1s 1'}).addClass('close').removeClass('open');
-			content.slideUp('slow');
-		}
-
-		function unfold(content) {
-			console.log("closed");
-			$('.ideatable').one('animationend webkitAnimationEnd', function() {
-				$('.camera').css({'-webkit-animation': 'unfold 1s 1', top: '-20%'});
-			});
-			$('.ideatable').css({'-webkit-animation': 'pageopen 2s 1'}).removeClass('close').addClass('open');
-
-			content.slideDown('slow');
-
-}
 
 		</script>
 </body>
