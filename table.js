@@ -39,10 +39,11 @@
 	$(".ideatable tr").bind('click', function() {
 		console.log("table row clicked");
 		var reference = $(this).data('ref');
-		var path = window.location.pathname;
+		var path = window.location.href;
+		path = path.substring(0, path.lastIndexOf("/") + 1);	
 		// window.location.origin + window.location.host + .substring(0, window.location.pathname.lastIndexOf("/"))
 		window.location.hash = "opened";
-		window.location = reference + ".html";
+		window.location = path + reference + ".html";
 		console.log(reference, $(this));
 		return;
 
