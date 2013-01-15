@@ -41,6 +41,7 @@
 		var reference = $(this).data('ref');
 		var path = window.location.href;
 		path = path.substring(0, path.lastIndexOf("/") + 1);	
+		console.log(path);
 		// window.location.origin + window.location.host + .substring(0, window.location.pathname.lastIndexOf("/"))
 		window.location.hash = "opened";
 		window.location = path + reference + ".html";
