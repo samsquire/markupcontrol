@@ -91,7 +91,7 @@
 // 	});
 
 
-var path = window.location.pathname;
+var path = window.location.href;
 path = path.substring(1 + path.lastIndexOf("/"), path.lastIndexOf("."));
 
 $(window).on('hashchange', function(e) {
