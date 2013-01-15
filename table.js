@@ -39,29 +39,21 @@
 	$(".ideatable tr").bind('click', function() {
 		console.log("table row clicked");
 		var reference = $(this).data('ref');
-		console.log(reference, $(this));			
+		var path = window.location.pathname;
+		// window.location.origin + window.location.host + .substring(0, window.location.pathname.lastIndexOf("/"))
+		window.location.hash = "opened";
+		window.location = reference + ".html";
+		console.log(reference, $(this));
+		return;
+
 		if (window.location.hash == "#" + reference) {
 			changePage();
 		} else { 
 			window.location.href = window.location.href.split('#')[0] + "#" + reference;
 		}
-				
-		/*
-		var myRow = $(this).closest('tr');
-		console.log(myRow.html());
-		console.log(reference);
-		var content = $("." + reference);
-		var contentRow = content.wrap("<tr>").parent()
-		content.wrap("<td colspan='4'>");
-		$(myRow).after(contentRow);	
-		$(content).slideToggle();	
-		$('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px' });
-		*/
 	});
 	
-	function changePage (e) {
-			console.log(e);
-			var reference = document.location.hash.substring(1);
+	function changePage (reference, callback) {
 			console.log("Change Page");
 			if (reference.length == 0) { 
 				if (isOpen()) {
@@ -86,12 +78,46 @@
 				$(myRow).after(contentRow);	
 			}
 
-			toggleEffect(content);	
+			toggleEffect(content, callback);	
 			
 			// $('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px'});
 
 	};
 
-	$(document).on('ready', changePage);
-	$(window).on('hashchange', function() {console.log('hash change');  changePage() });
+	// $(document).on('ready', changePage);
+//	$(window).on('hashchange', function() {
+//			var reference = document.location.hash.substring(1);
+//			console.log('hash change');  changePage(reference)
+// 	});
 
+
+var path = window.location.pathname;
+path = path.substring(1 + path.lastIndexOf("/"), path.lastIndexOf("."));
+
+$(window).on('hashchange', function(e) {
+	console.log("change page");
+	changePage(path);
+});
+
+
+$(".ideatable").ready(function() {
+	console.log("Ideatable ready: " + path);
+	if (window.location.hash != "#opened") {
+		if ($("." + path).length == 1) {
+			console.log("Opening page", path);
+			changePage(path);
+		}
+	}
+});
+
+$(window).bind('unload', function() {
+	$(".content").slideUp();	
+});
+
+$(window).bind('pageshow', function(e) {
+	if (window.location.hash == "#opened") {
+			$('.ideatable').removeClass('close').addClass('open');
+			$('.camera').css({top: '-20%'});
+			changePage("123");
+	}
+});
