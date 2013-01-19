@@ -28,6 +28,7 @@
 		console.log("closed");
 		$('.ideatable').one('animationend webkitAnimationEnd', function() {
 			// $('.camera').css({'-webkit-animation': 'unfold 1s 1', top: '-20%'});
+			console.log(content.closest("tr").prev().position().top);
 			$(".camera").animate({top:  5 - content.closest("tr").prev().position().top + 'px'});
 			$('.ideatable').removeClass('close').addClass('open');
 		});
@@ -123,3 +124,5 @@ $(window).bind('pageshow', function(e) {
 			changePage("123");
 	}
 });
+
+$('.content').hide();
