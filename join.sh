@@ -26,7 +26,7 @@ if [[ -e $FILE ]]; then
 				fi
 				
 				if [[ $FILENESTED -eq 0 && $NESTED -eq 0 ]]; then
-					echo "No nested - completeley plain."
+					echo "No nested - completeley plain. $INPUT"
 					ok=1
 					TEXT=$(xml sel -t -v "//sam[@name = '$INPUT']" "./sections/$INPUT" | xml unesc)
 					echo "$TEXT"

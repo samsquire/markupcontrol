@@ -17,7 +17,7 @@
 		console.log("opened");
 		content.slideUp('slow');
 		$('.ideatable').one('animationend webkitAnimationEnd', function() {
-			$('.camera').css({'-webkit-animation': 'fold 1s 1', top: '25%'});
+			$('.camera').css({'-webkit-animation': 'fold 1s 1', top: '30%'});
 			$(this).removeClass('open').addClass('close');
 		});
 		$('.ideatable').css({'-webkit-animation': 'pageclose 1s 1'});
@@ -27,7 +27,8 @@
 		// $('.camera').css({'-webkit-perspective': '700px', '-webkit-perspective-origin': $(content).position().left + 'px ' + $(content).position().top + 'px'});
 		console.log("closed");
 		$('.ideatable').one('animationend webkitAnimationEnd', function() {
-			$('.camera').css({'-webkit-animation': 'unfold 1s 1', top: '-20%'});
+			// $('.camera').css({'-webkit-animation': 'unfold 1s 1', top: '-20%'});
+			$(".camera").animate({top:  5 - content.closest("tr").prev().position().top + 'px'});
 			$('.ideatable').removeClass('close').addClass('open');
 		});
 		$('.ideatable').css({'-webkit-animation': 'pageopen 2s 1'});
@@ -37,7 +38,6 @@
 
 
 	$(".ideatable tr").bind('click', function() {
-		console.log("table row clicked");
 		var reference = $(this).data('ref');
 		var path = window.location.href;
 		path = path.substring(0, path.lastIndexOf("/") + 1);	

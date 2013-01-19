@@ -2,14 +2,14 @@
 <sam type="sparql" name="encserver.sparql">
 <sam name="idea.prefix"/>	
 INSERT DATA {
-:EncryptionServer a owl:Class; a :Idea;
-	 dc:title "Encryption Server";
-	 dc:description "An encryption server";
-	 dc:identifier "EncryptionServer".
+:SamServer a owl:Class; a :Idea;
+	 dc:title "Sam Server";
+	 dc:description "Example example";
+	 dc:identifier "SamServer".
 }
 </sam>
 <![CDATA[
-<div class="content EncryptionServer">
+<div class="content SamServer">
 This is the idea database. Please explore.
 </div>
 ]]><sam name="fulltable.md"/>
