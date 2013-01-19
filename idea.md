@@ -10,7 +10,4 @@ INSERT DATA {
 	 dc:identifier "<Idea/>".
 }
 <![CDATA[</sam>]]>
-<![CDATA[
-<div class="content <Idea/>">
-]]>
 </document>

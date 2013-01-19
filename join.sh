@@ -11,7 +11,8 @@ if [[ -e $FILE ]]; then
 	do
 		INPUT=$line
 		OK=1
-		TYPE=$(xml sel -t -v "//sam[@name = '$INPUT']/@type" "./sections/$INPUT") 	
+		# TYPE=$(xml sel -t -v "//sam[@name = '$INPUT']/@type" "./sections/$INPUT") 	
+		TYPE=$(xml sel -t -v "//sam[@name = '$INPUT']/@type" "$FILE") 	
 		if [[ -z "$TYPE" ]]; then
 				NESTED=$(xml sel -t -v "count(//sam[@name = '$INPUT']/child::sam)" "./sections/$INPUT")	
 				FILENESTED=$(xml sel -t -v "count(//sam[@name = '$INPUT']/child::sam)" "$FILE")	

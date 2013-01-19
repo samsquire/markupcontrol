@@ -57,12 +57,12 @@
 	@-webkit-keyframes fold  /* Safari and Chrome */
 	{
 		0% 	 { top: -20%;  }
-		100% { top: 25%;  }
+		100% { top: 30%;  }
 	}
 
 	@-webkit-keyframes unfold  /* Safari and Chrome */
 	{
-		0% 	 { top: 25%;  }
+		0% 	 { top: 30%;  }
 		100% { top: -20%;  }
 	}
 
@@ -135,8 +135,8 @@
 		-webkit-transform-style: preserve-3d;
 		-webkit-perspective-origin: 9px 76px 200px;
 		-webkit-perspective: 1000px;	
-		position: relative;
-		top: 25%;
+		position: absolute;
+		top: 30%;
 	}
 
 	.ideatable tr:hover td {
@@ -283,13 +283,13 @@ for $idea in $ideaTable//sam:hasIdea
 </table>
 </div>
 
-	<div class="content 123">
-	The encryption server is a way of keeping files on a computer secure.
-	</div>	
+<div class="content 123">
+The encryption server is a way of keeping files on a computer secure.
+</div>	
 
 ]]>
 <![CDATA[
-<script src="table.js"></script>	
+<script type="text/javascript" src="table.js"></script>	
 </body>
 </html>
 ]]>
