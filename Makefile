@@ -1,11 +1,20 @@
-DEPENDENCIES=.deps
 ARTICLES=$(wildcard *.md)
+MCFILES=$(filter-out "README.md",$(ARTICLES))
+DEPENDENCIES=$($ARTICLES:%.md=%.md.d)
+GENERATED=$(filter-out "README.html, $(ARTICLES:%.md=./generated/%.html))
 
-all: $(ARTICLES:.md=.html)
+.SECONDARY:
+./%.md.d: ./%.md
+	echo "Saving dependencies for $< in $@"
+	./mcdeps.sh "$<" > ./$@
 
-%.html: %.md
-	./mcdeps.sh $< > $(subst .md,.d,$<) 
-	./join.sh $<
-	pandoc -f markdown -t html5 -o ./generated/$@ ./merged/$<
+.SECONDARY:
+./generated/%.html: %.md.d
+	./join.sh $(subst .md.d,.md,$<)
+	pandoc -f markdown -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
+	echo "generated"
 
--include $(ARTICLES:.md=.d)
+-include $(DEPENDENCIES)
+
+.PRECIOUS:
+all: $(GENERATED)

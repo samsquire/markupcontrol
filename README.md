@@ -49,7 +49,6 @@ While none of the above examples exist, the principle of MC is that it *should* 
 Rather than your platform or blog platform 'allowing you to use' certain elements at creation time, you should be able to use whatever you like and then make decisions about how these custom elements will be rendered after creation time. For example, you can find out where you have used your `<filename/>` elements and then define some MarkupControl to handle all cases where you have used them. You might make a fleeting reference to `<petpeeve/>` in an element and want to compile your `<petpeeve/>` articles in the future.
 
 Your choice of element might dictate the format, the API of the data. For example, if you're using an `<sqlquery/>` element, you should be able to interact with the data inside that element with SQL statements. The same applies to a `<json/>` element.
- 
 
 # Types of Tag
 
@@ -61,6 +60,13 @@ There are some powerful ways that MC can be represented.
 	* a list of abbreviations/substitutions that you commonly use
 	* a set of subjects, objects or predicates that you wish to refer to such as a product, a person or a company.
 
+# Dependency Tracking
+
+One file can have many different components or sections. You do not want to generate lots of files unnecessarily - especially if your documents contain element processors. MC has a `makefile` that ensures only modified pages or sections trigger re-generation.
+
+ * if an untyped section file has changed, the file can be `re-joined`
+ * if a typed section has changed, the file must be `re-processed` and `re-joined`
+ * if a MC file has changed, the file must be `re-extracted`.
 
 ## Named Sections
 
@@ -294,4 +300,7 @@ You can see some file dependencies with the following. This is `xquery` processo
 	</sam></sam>
 ```
 
- 
+# ToDo
+
+ * Pull code from extractblocks.sh into a script that processes the blocks in a single file.
+ * Extract a block given a name or all blocks in a file.
