@@ -11,7 +11,7 @@ GENERATED=$(filter-out "README.html, $(ARTICLES:%.md=./generated/%.html))
 .SECONDARY:
 ./generated/%.html: %.md.d
 	./join.sh $(subst .md.d,.md,$<)
-	pandoc -f markdown -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
+	pandoc -f markdown --strict -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
 	echo "generated"
 
 -include $(DEPENDENCIES)

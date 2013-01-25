@@ -125,7 +125,6 @@ INSERT DATA {
 ]]></sam>
 End idea insert
 
-
 <sam type="n3" name="samidea.rdfa">
 <sam type="data" name="samsideas.sparql"><![CDATA[
 PREFIX s: <http://samsquire.com/>
