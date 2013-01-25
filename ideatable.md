@@ -14,161 +14,11 @@
 <link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'></link>
 <title>ideas.samsquire.co.uk</title>
 <script src="jquery-1.8.3.min.js"></script>
-
-
-<style>
-	* {
-		 -webkit-font-smoothing: subpixel-antialiased;   
-	 }
-
-	h1 {
-		color: lime;
-		font-family: 'Belgrano';
-	}
-
-	body {
-		background-color: black;
-	}
-
-
-	.content {
-		display: none;
-	}
-
-	@-webkit-keyframes wobble  /* Safari and Chrome */
-	{
-		0%   {  -webkit-transform: rotateY(15deg) rotateZ(5deg) rotateX(5deg);  }
-		100% {  -webkit-transform: rotateY(15deg) rotateZ(-5deg) rotateX(5deg);}
-	}
-
-	@-webkit-keyframes pageopen  /* Safari and Chrome */
-	{
-		0%   {  -webkit-transform: rotateY(15deg) rotateZ(5deg) rotateX(5deg);  }
-		100% {  -webkit-transform: rotateY(0deg) rotateZ(-0deg) rotateX(0deg);}
-
-	}
-
-	@-webkit-keyframes pageclose  /* Safari and Chrome */
-	{
-		0% 	{  -webkit-transform: rotateY(0deg) rotateZ(0deg) rotateX(0deg);}
-		100% {  -webkit-transform: rotateY(15deg) rotateZ(5deg) rotateX(5deg);  }
-	}
-
-	@-webkit-keyframes fold  /* Safari and Chrome */
-	{
-		0% 	 { top: -20%;  }
-		100% { top: 30%;  }
-	}
-
-	@-webkit-keyframes unfold  /* Safari and Chrome */
-	{
-		0% 	 { top: 30%;  }
-		100% { top: -20%;  }
-	}
-
-	.ideatable {
-		background-color: black;
-		color: lime;
-		margin: auto;
-		left: auto;
-		width: 90em;
-		border: 3px solid #74AB00;
-		border-radius: 1em;	
-		border-top: none;
-		border-bottom: none;
-		padding: 0.5ex;
-		position: relative;
-		font-family: 'Belgrano';
-		-webkit-transform-style: preserve-3d;
-		-webkit-perspective: 1000px;	
-		-webkit-perspective-origin: 0px 0px 0px;
-		-webkit-transform: rotateY(15deg) rotateZ(5deg) rotateX(5deg);
-		/* -webkit-animation: wobble 10s 1; */
-		/* -webkit-animation-direction:alternate; */
-		-webkit-transform-origin: 50% 50% 0%;
-		border-spacing:0;
-	}
-
-	.open {
-		-webkit-transform: rotateY(0deg) rotateZ(-0deg) rotateX(0deg);
-	}
-	.close {
-		-webkit-transform: rotateY(15deg) rotateZ(5deg) rotateX(5deg);
-	}
-
-	.statustable {
-
-	}
-
-	.ideatable th {
-		padding: 0.3ex;
-		color: teal;
-		border: 2px solid #74AB00;
-		border-right: none;
-		border-left: none;
-		border-radius: 1ex;	
-		/* background-color: #332F3E; */
-		margin-bottom: 0.5ex;
-	}
-
-
-	.ideatable tr td:first-child {
-		margin: 0.5ex;
-	}
-/* 
-	.ideatable tr td:first-child {
-		background-color: #E5FCC2;
-		border-top-left-radius: 1em;	
-		border-top-right-radius: 1em;	
-	}
-	.ideatable tr:last-child td {
-		background-color: #E5FCC2;
-	}
-
-	.ideatable tr:nth-child(even) td {
-		background-color: #E5FCC2;
-	}
-*/
-
-	.camera {
-		display: block;
-		-webkit-transform-style: preserve-3d;
-		-webkit-perspective-origin: 9px 76px 200px;
-		-webkit-perspective: 1000px;	
-		position: absolute;
-		top: 30%;
-	}
-
-	.ideatable tr:hover td {
-		border-left:3px solid #74AB00;
-		background-color: #3B3B3D;
-		border-radius: 0.5ex;
-	}
-
-	h1 {
-	width: 100%;
-	}
-
-</style>
+<link rel="stylesheet" type="text/css" href="styles.css"/>
 
 </head>
 <body>
 	<h1>ideas.samsquire.co.uk</h1>
-
-	<sam:table xmlns="http://samsquire.co.uk/">
-		<Config>
-			<Headings>
-			<Name></Name><Description></Description><Status></Status>
-			</Headings>
-		</Config>
-
-
-		<Rows>	
-			<Idea>
-				<Name>Encryption Server</Name>
-			</Idea>	
-		</Rows>
-	</sam:table>
 	<div class="camera">
 ]]>
 
@@ -272,7 +122,12 @@ for $idea in $ideaTable//sam:hasIdea
     return (
         element tr {
 						attribute data-ref { $identifier },
-            element td { $pageName},
+            element td {
+						 element a {
+						 attribute href { fn:concat($identifier, '.html') },
+						 text { $pageName }
+							 }
+						},
             element td { $description }
         }    
         )
