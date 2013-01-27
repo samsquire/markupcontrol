@@ -67,16 +67,6 @@ if [[ $VALID -eq 1 ]]; then
 		fi;
 		git add $outfilename
 	done
-
-
-	stash=`git stash`; # uncommitted changes are ignored
-
-	needle="HEAD";
-	if [[ "$stash" == *"$needle"*  ]]; then
-		git stash pop
-	else 
-		echo "No uncommitted changes on disk."
-	fi
 else
 	echo "Ignoring $FILE"		
 fi
