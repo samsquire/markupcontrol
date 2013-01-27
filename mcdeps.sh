@@ -1,7 +1,8 @@
 #!/bin/bash
 
 FILE="$1"
-printf "${FILE}.d: "
+SECTIONLINES=""
+DEPLINES=""
 
 while read -r line;
 do
@@ -13,5 +14,9 @@ do
 		else
 			LOCATION=$SECTION		
 	fi
-	printf "${LOCATION}.d "	
+	DEPLINES="$DEPLINES ${LOCATION}.d"	
+	SECTIONLINES="$SECTIONLINES ${LOCATION}"	
 done < <(xml unesc - < "$FILE" | xml sel -t -v "//sam//@name")
+
+echo "${FILE}.d:$DEPLINES"
+# echo "${FILE} $SECTIONLINES"
