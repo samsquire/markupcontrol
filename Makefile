@@ -3,24 +3,28 @@ MCFILES=$(filter-out "README.md",$(ARTICLES))
 DEPENDENCIES=$($ARTICLES:%.md=%.md.d)
 GENERATED=$(filter-out "README.html, $(ARTICLES:%.md=./generated/%.html))
 
--include $(DEPENDENCIES)
-
 .SECONDARY:
+
+-include $(DEPENDENCIES)
+.PHONY: clean build all
+
+all: $(GENERATED)
+
 ./%.md.d: ./%.md
 	echo "Saving dependencies for $< in $@"
 	./mcdeps.sh "$<" > ./$@
 
 .SECONDARY:
-./generated/%.html: %.md.d 
+all: ./generated/%.html: %.md.d 
 	./extractfile.sh $(subst .md.d,.md,$<)
-	./join.sh $(subst .md.d,.md,$<)
-	pandoc -f markdown -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
 
-./generated/index.html: $(GENERATED)
+build: ./generated/%.html: %.md.d 
+	echo "Creating output to $< $@ $(word 3,$^)"
+	# ./join.sh $(subst .md.d,.md,$<)
+	# pandoc -f markdown -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
 
 .PRECIOUS:
-all: $(GENERATED)
+build: $(GENERATED)
 
-.PHONY: clean
 clean:	
 	rm ./output/* && rm ./sections/* && mv ./merged/file . && rm ./merged/* && mv file ./merged	&& rm ./generated/*.html
