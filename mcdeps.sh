@@ -18,5 +18,5 @@ do
 	SECTIONLINES="$SECTIONLINES ${LOCATION}"	
 done < <(xml unesc - < "$FILE" | xml sel -t -v "//sam//@name")
 
-echo "${FILE}.d:$DEPLINES"
-# echo "${FILE} $SECTIONLINES"
+# echo "${FILE}:$DEPLINES"
+echo "${FILE}: $SECTIONLINES"
