@@ -26,13 +26,13 @@ build: $(GENERATED)
 	./extractfile.sh $<
 
 .SECONDARY:
-$(MERGED): ./merged/%.md: ./%.md.d
+./merged/%.md: ./%.md.d
 	 ./join.sh $(subst .md.d,.md,$<)
 
 ./generated/%.html: ./merged/%.md 
-	echo "${MERGED}"
-	# pandoc -f markdown -t html5 -o $@ "./merged/$(subst .md.d,.md,$<)"
+	echo "Building $<..."
+	pandoc -f markdown -t html5 -o $@ "$(subst .md.d,.md,$<)"
 
-# -include $(DEPENDENCIES)
+-include $(DEPENDENCIES)
 
 

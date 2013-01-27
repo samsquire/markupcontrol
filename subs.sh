@@ -13,10 +13,10 @@ echo "the file is $FILE, source is: $SOURCE, template is $TEMPLATE: " >&2
 
 ./submit.sh "$TEMPLATE" "$TEMPLATE" "sources" "application/xquery" >&2
 
-./runxquery.sh "sources" "$TEMPLATE" | xml unesc > ./output/substituted
+SUBNAME=$NAME.sub
+./runxquery.sh "sources" "$TEMPLATE" | xml unesc > ./output/$SUBNAME
+./extractfile.sh "./output/$SUBNAME" >&2
+./walk.sh "./output/$SUBNAME" >&2
+./join.sh "./output/$SUBNAME" >&2
 
-./extractfile.sh "./output/substituted" >&2
-./walk.sh ./output/substituted >&2
-./join.sh ./output/substituted >&2
-
-cat ./merged/substituted
+cat "./merged/$SUBNAME"
