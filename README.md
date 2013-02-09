@@ -304,3 +304,5 @@ You can see some file dependencies with the following. This is `xquery` processo
 
  * Pull code from extractblocks.sh into a script that processes the blocks in a single file.
  * Extract a block given a name or all blocks in a file.
+ * Be more functional.
+ * Make markup processor customizable.

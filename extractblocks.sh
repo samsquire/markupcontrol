@@ -5,5 +5,5 @@ DELETE=${1:-$nodelete}
 VALID=0
 while read -r line;
 do
-	./extractfile.sh "$line"	
+	extractfile.sh "$line"	
 done < <(git diff-index --name-only HEAD)

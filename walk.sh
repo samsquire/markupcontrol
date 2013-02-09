@@ -29,17 +29,17 @@ if [[ $DEEPEST > 0 ]]; then
 				echo "Inclusion node."
 		fi
 		if [[ -n "$TYPE" ]]; then
-				./$TYPE.sh $outfilename $filename > ./output/$filename
+				$TYPE.sh "$outfilename" "$filename" > "./output/$filename"
 				# ./submit.sh ./output/$filename $filename "output"	
 				echo "Output was:"
-				cat output/$filename
+				cat "output/$filename"
 				# Write the output into the file
 				# xml ed -O -L --update "/sam[@name = '$filename']" --value "$(<output/$filename)"	"$outfilename"
 				echo "INSIDE $FILE IS $DEEPNODE $outfilename $filename I have $DEPENDENTS dependents"	
 					
 				# xml sel -t -v "$DEEPNODE" "$FILE"
 				
-				xml ed -O -L --update "//sam[@name = '$filename']" --value "$(<./output/$filename)" "$outfilename"
+				xml ed -P -O -L --update "//sam[@name = '$filename']" --value "$(<./output/$filename)" "$outfilename"
 		fi
 
 			if [[ $DEPENDENTS -gt 0 ]]; then
@@ -54,7 +54,7 @@ if [[ $DEEPEST > 0 ]]; then
 					# Use the last type
 					# xml ed -L --insert "/sam[@name = '$filename']" --type attr --name "type" --value "$INNERTYPE"	"$outfilename"
 					if [[ -n "$INNERTYPE" ]]; then
-						xml ed -O -L --update "//sam[@name = '$filename']/@type" --value "$INNERTYPE"	"$outfilename"
+						xml ed -P -O -L --update "//sam[@name = '$filename']/@type" --value "$INNERTYPE"	"$outfilename"
 					fi
 					# xml ed -L --update "/sam[@name = '$filename']/@name" --value "$innerfilename"	"$outfilename"
 
@@ -71,12 +71,12 @@ if [[ $DEEPEST > 0 ]]; then
 						fi
 						echo "Output text is $TEXT"
 						echo "Writing into parent: $TEXT $inneroutputfilename"
-						xml ed -O -L --insert "//sam[@name = '$filename']" --type text --name ignored --value "$TEXT" "$inneroutputfilename"
+						xml ed -P -O -L --insert "//sam[@name = '$filename']" --type text --name ignored --value "$TEXT" "$inneroutputfilename"
 						# Delete the old node
-						xml ed -O -L --delete "//sam[@name = '$filename']" "$inneroutputfilename"
+						xml ed -P -O -L --delete "//sam[@name = '$filename']" "$inneroutputfilename"
 
 					if [[ -n "$INNERTYPE" ]]; then
-						./$INNERTYPE.sh $inneroutputfilename $innerfilename > ./output/$innerfilename
+						$INNERTYPE.sh "$inneroutputfilename" "$innerfilename" > "./output/$innerfilename"
 					fi
 					echo "Updating file contents"
 					# xml ed -L --update "//sam[@name = '$filename']" --value "$(<./output/$innerfilename)"	"$inneroutputfilename"

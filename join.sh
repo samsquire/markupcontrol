@@ -36,7 +36,7 @@ if [[ -e $FILE ]]; then
 						if [[ "$FILENESTED" = 0 ]]; then
 							if [[ -z "$MERGING" ]]; then
 								OK=1
-								./join.sh "./sections/$INPUT" "merging"
+								join.sh "./sections/$INPUT" "merging"
 								echo "Source file has no nested children. Must be completely sourced."
 								TEXT=$(<./merged/$INPUT)
 							fi
@@ -48,19 +48,19 @@ if [[ -e $FILE ]]; then
 				echo
 			else
 				echo "Typed text $INPUT"	
-				TEXT=$(<./output/$INPUT)
+				TEXT=$(<"./output/$INPUT")
 		fi
 	
 		if [[ "$OK" == 1 ]]; then
-			xml ed -L --insert "//sam[@name = '$INPUT']" --type text --name ignored --value "$TEXT" "$FILE"
+			xml ed -P -L --insert "//sam[@name = '$INPUT']" --type text --name ignored --value "$TEXT" "$FILE"
 			# Delete the old node
-			xml ed -L --delete "//sam[@name = '$INPUT']" "$FILE"
+			xml ed -P -L --delete "//sam[@name = '$INPUT']" "$FILE"
 		fi
 
 	done < <(xml sel -t -v '//sam/@name' "$FILE")
-	xml sel -t -v '/' $FILE > $FILE.tmp
-	xml unesc - < $FILE.tmp > $FILE
-	rm $FILE.tmp
+	xml sel -t -v '/' "$FILE" > "$FILE.tmp"
+	xml unesc - < "$FILE.tmp" > "$FILE"
+	rm "$FILE.tmp"
 	else
 		echo "No file exists"
 

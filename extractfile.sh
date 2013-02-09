@@ -1,5 +1,5 @@
 #!/bin/bash
-
+PREFIX="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VALID=0
 FILE="$1"
 NODELETE="--nodelete"
@@ -24,7 +24,7 @@ fi
 
 if [[ $VALID -eq 1 ]]; then
 	# Process nested
-	./walk.sh "$FILE"
+	walk.sh "$FILE"
 	# Process plain markup elements
 	typed="(//sam[@type and not(./sam) and text()])"
 	typedElements=$(xml sel -t -v "count($typed)" "$FILE")	
@@ -39,9 +39,9 @@ if [[ $VALID -eq 1 ]]; then
 			rm $outfilename
 			xml sel -t -c "$typed[$i]" "$FILE" > $outfilename;
 			echo "Looking for file $type.sh";
-			if [[ -e "./$type.sh" ]]; then
+			if [[ -e "$PREFIX/$type.sh" ]]; then
 				echo "Found type $type"
-				./$type.sh $outfilename $filename > output/$filename
+				"$type.sh" "$outfilename" "$filename" > "./output/$filename"
 			else
 				echo "Unknown type $type"
 			fi
@@ -51,7 +51,7 @@ if [[ $VALID -eq 1 ]]; then
 
 	SEARCH="(//sam[not(@type) and text()])"
 	elements=$(xml sel -t -v "count($SEARCH)" "$FILE")
-	./walk.sh "$FILE"
+	walk.sh "$FILE"
 	echo "There are $elements markup elements.";
 	for i in $(seq 1 $elements);
 	do 
@@ -63,9 +63,9 @@ if [[ $VALID -eq 1 ]]; then
 		xml sel -t -c "$node" "$FILE" > $outfilename;
 		if [[ "$DELETE" == "--delete" ]]; then
 			echo "Received --delete argument. Deleting original";
-			xml ed -L --update "$node" --value "" "$FILE"
+			xml ed -P -L --update "$node" --value "" "$FILE"
 		fi;
-		git add $outfilename
+		# git add $outfilename
 	done
 else
 	echo "Ignoring $FILE"		

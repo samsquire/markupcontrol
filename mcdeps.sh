@@ -19,7 +19,7 @@ do
 done < <(xml unesc - < "$FILE" | xml sel -t -v "//sam//@name")
 
 # echo "${FILE}:$DEPLINES"
-if [[ $file -ne "idea.md" ]]; then
+if [[ $FILE != "idea.md" ]]; then
 		echo "${FILE}: idea.md $SECTIONLINES"
 	else
 		echo "${FILE}: $SECTIONLINES"

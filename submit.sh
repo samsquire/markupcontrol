@@ -5,10 +5,11 @@ NAME="$2"
 DEST="$3"
 xml="application/xml"
 TYPE=${4:-$xml}
+SERVER=${5:-localhost:8660}
 
 curl --user admin:admin \
  	-i -H "Accept: application/xml" \
 	-H "Content-Type: $TYPE" \
 	-X PUT \
-  --data "@$FILE" \
- 	"http://localhost:8660/exist/rest/db/sam/$DEST/$NAME"
+  -T "$FILE" \
+ 	"http://$SERVER/exist/rest/db/sam/$DEST/$NAME"
