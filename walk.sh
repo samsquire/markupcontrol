@@ -29,10 +29,8 @@ if [[ $DEEPEST > 0 ]]; then
 				echo "Inclusion node."
 		fi
 		if [[ -n "$TYPE" ]]; then
-				$TYPE.sh "$outfilename" "$filename" > "./output/$filename"
+				$TYPE.sh "$outfilename" "$filename" "$FILE" > "./output/$filename"
 				# ./submit.sh ./output/$filename $filename "output"	
-				echo "Output was:"
-				cat "output/$filename"
 				# Write the output into the file
 				# xml ed -O -L --update "/sam[@name = '$filename']" --value "$(<output/$filename)"	"$outfilename"
 				echo "INSIDE $FILE IS $DEEPNODE $outfilename $filename I have $DEPENDENTS dependents"	
@@ -69,14 +67,12 @@ if [[ $DEEPEST > 0 ]]; then
 								echo $TEXT
 							fi	
 						fi
-						echo "Output text is $TEXT"
-						echo "Writing into parent: $TEXT $inneroutputfilename"
 						xml ed -P -O -L --insert "//sam[@name = '$filename']" --type text --name ignored --value "$TEXT" "$inneroutputfilename"
 						# Delete the old node
 						xml ed -P -O -L --delete "//sam[@name = '$filename']" "$inneroutputfilename"
 
 					if [[ -n "$INNERTYPE" ]]; then
-						$INNERTYPE.sh "$inneroutputfilename" "$innerfilename" > "./output/$innerfilename"
+						$INNERTYPE.sh "$inneroutputfilename" "$innerfilename" "$FILE" > "./output/$innerfilename"
 					fi
 					echo "Updating file contents"
 					# xml ed -L --update "//sam[@name = '$filename']" --value "$(<./output/$innerfilename)"	"$inneroutputfilename"

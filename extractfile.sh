@@ -41,7 +41,7 @@ if [[ $VALID -eq 1 ]]; then
 			echo "Looking for file $type.sh";
 			if [[ -e "$PREFIX/$type.sh" ]]; then
 				echo "Found type $type"
-				"$type.sh" "$outfilename" "$filename" > "./output/$filename"
+				"$type.sh" "$outfilename" "$filename" "$FILE" > "./output/$filename"
 			else
 				echo "Unknown type $type"
 			fi

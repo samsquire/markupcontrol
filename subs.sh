@@ -18,7 +18,7 @@ submit.sh "$TEMPLATE" "$TEMPLATE" "sources" "application/xquery" >&2
 
 SUBNAME="$NAME.sub"
 runxquery.sh "sources" "$TEMPLATE" | xml unesc > "./output/$SUBNAME"
-cat ./output/$SUBNAME >&2
+cat "./output/$SUBNAME" >&2
 extractfile.sh "./output/$SUBNAME" >&2
 walk.sh "./output/$SUBNAME" >&2
 join.sh "./output/$SUBNAME" >&2
