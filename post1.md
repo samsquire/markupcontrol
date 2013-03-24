@@ -15,7 +15,6 @@ WHERE { ?ideas a :Idea  }
 </sam>
 </sam>
 
-
 ```
 <sam name="code.py">This is revised now cool and YEAH
 MAN! </sam>yes. 
