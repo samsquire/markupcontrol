@@ -1,5 +1,4 @@
 # MarkupControl
-===
 
 You like using markup languages:
 
@@ -28,7 +27,6 @@ You don't want to fully commit to a particular brand of CMS, blog, generator or 
  * use dynamic or static generation depending on the circumstances
 
 # Concept
-===
 
 MarkupControl is simple. Any language can be wrapped by MarkupControl. MC is a script that you can use manually or integrate with your content workflow for automation. Your content can be processed before it makes its journey to other ecosystems, such as your CMS or your web framework.
 
