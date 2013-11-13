@@ -157,9 +157,9 @@ end
 
 rule "oli sent me an idea"
 when
-        UserCommand(message == "oi") from entry-point "Remote Users"
+        UserCommand(message == "aleks") from entry-point "Remote Users"
 then
-        System.out.println("Oli sent me an idea :-)");
+        System.out.println("Aleks sent me an idea :-)");
 end
 
 ]]>

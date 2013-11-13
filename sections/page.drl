@@ -1,0 +1,25 @@
+<sam type="rule" name="page.drl">
+package lifeengine.dashboard 
+rule "I like crisps tuesdays"
+when
+        UserCommand(message.equals("crispst")) from entry-point "Remote Users"
+then
+        System.out.println("Crisps are tgood");
+end
+
+rule "I like cheese everyday such as roquefort"
+when
+        $uc : UserCommand(message == "roquefort") from entry-point "Remote Users"
+then
+        System.out.println($uc.getMessage() + " is good");
+end
+
+rule "oli sent me an idea"
+when
+        UserCommand(message == "aleks") from entry-point "Remote Users"
+then
+        System.out.println("Aleks sent me an idea :-)");
+end
+
+
+</sam>
